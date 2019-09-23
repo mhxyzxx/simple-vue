@@ -27,7 +27,6 @@
     </div>
 </template>
 <script>
-import axios from "axios";
 export default {
   components: {},
   data() {
@@ -39,31 +38,42 @@ export default {
     };
   },
   mounted() {
-    //   console.log(this.$route.params.id);
+    console.log(this.$route.params.id);
     this.getByIdData();
   },
   methods: {
     // 拿到对应的id，根据id查询渲染
     getByIdData() {
-        axios.get("http://localhost:3000/heroes/" + this.$route.params.id).then((res) => {
-            // console.log(res);
-            const {status, data} = res;
-            if(status == 200) {
-                this.formdata = data;
-                console.log(this.formdata);
-            }else {
-                alert('网络请求失败');
-            }
-        })
+      this.$http
+        .get("heroes/" + this.$route.params.id)
+        .then(res => {
+          // console.log(res);
+          const { status, data } = res;
+          if (status == 200) {
+            this.formdata = data;
+            console.log(this.formdata);
+          } else {
+            alert("网络请求失败");
+          }
+        });
     },
     // 编辑提交数据
     editHero() {
-        axios.put("http://localhost:3000/heroes/" + this.$route.params.id, this.formdata).then((res) => {
-            // console.log(res);
+      this.$http
+        .put(
+          "heroes/" + this.$route.params.id,
+          this.formdata
+        )
+        .then(res => {
+          // console.log(res);
+          if (res.status == 200) {
             this.$router.push({
-                name: 'list'
-            })
-        })
+              name: "list"
+            });
+          } else {
+            alert("编辑失败");
+          }
+        });
     }
   }
 };

@@ -3,11 +3,11 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 Vue.use(VueRouter);
 // 引入路由组件
-import List from './components/appList.vue';
-import Foo from './components/Foo.vue';
-import Bar from './components/Bar.vue';
-import Add from './components/Add.vue';
-import Edit from './components/Edit.vue';
+import List from '../components/list/appList.vue';
+import Foo from '../components/foo/Foo.vue';
+import Bar from '../components/bar/Bar.vue';
+import Add from '../components/list/Add.vue';
+import Edit from '../components/list/Edit.vue';
 
 const routes = [{
     path: "/",
@@ -37,6 +37,7 @@ const routes = [{
 }];
 
 const router = new VueRouter({
+    linkActiveClass: 'active',
     routes
 });
 

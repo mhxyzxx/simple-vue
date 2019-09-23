@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+
 export default {
   components: {},
   data() {
@@ -41,7 +41,7 @@ export default {
   },
   methods: {
       addHero() {
-          axios.post('http://localhost:3000/heroes',this.formdata).then((res) => {
+          this.$http.post('heroes',this.formdata).then((res) => {
             //   console.log(res);
             // 添加成功后，返回列表页
             if(res.status == 201) {

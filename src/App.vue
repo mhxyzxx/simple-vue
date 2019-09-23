@@ -23,9 +23,9 @@
 
 <script>
 // 1. 引入组件
-import appHeader from "./components/AppHeader.vue";
-import appSlider from "./components/appSlider.vue";
-import appList from "./components/appList.vue";
+import appHeader from "./components/common/AppHeader.vue";
+import appSlider from "./components/common/appSlider.vue";
+import appList from "./components/list/appList.vue";
 export default {
   name: "app",
   // 2. 注册组件

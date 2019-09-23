@@ -18,7 +18,10 @@
                         <td>{{item.name}}</td>
                         <td>{{item.gender}}</td>
                         <td>
-                            <a href="edit.html" @click.prevent="editShowPage(item.id)">编辑</a>&nbsp;&nbsp;
+                            <!-- 第一种方法：router-link改变路径写法 -->
+                            <router-link :to="{name:'edit',params:{id:item.id}}">编辑</router-link>
+                            <!-- 第二种方法：使用编程式导航写法 -->
+                            <!-- <a href="edit.html" @click.prevent="editShowPage(item.id)">编辑</a>&nbsp;&nbsp; -->
                             <a href="javascript:;" @click.prevent="delHero(item.id)">删除</a>
                         </td>
                     </tr>
@@ -29,7 +32,7 @@
 </template>
 <script>
 // 引入axios文件
-import axios from "axios";
+
 export default {
   data() {
     return {
@@ -43,7 +46,7 @@ export default {
     //   删除功能
     delHero(id) {
       if (confirm("sure?")) {
-        axios.delete("http://localhost:3000/heroes/" + id).then(res => {
+        this.$http.delete("heroes/" + id).then(res => {
           console.log(res);
           // 删除完成后，重新加载列表
           this.getData();
@@ -54,7 +57,7 @@ export default {
     // 渲染列表
     getData() {
       // 发送请求获取数据
-      axios.get("http://localhost:3000/heroes").then(res => {
+      this.$http.get("heroes").then(res => {
         // console.log(res);
         const { status, data } = res;
         if (status == 200) {
@@ -72,12 +75,12 @@ export default {
     },
 
     // 编辑功能
-    editShowPage(ID) {
-        this.$router.push({
-            name: 'edit',
-            params: {id : ID}
-        })
-    }
+    // editShowPage(ID) {
+    //     this.$router.push({
+    //         name: 'edit',
+    //         params: {id : ID}
+    //     })
+    // }
   }
 };
 </script>
